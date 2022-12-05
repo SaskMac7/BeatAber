@@ -19,6 +19,8 @@ public class TilesLogic : MonoBehaviour
 
     public Rigidbody rbR;
     public Rigidbody rbL;
+    public Rigidbody rbT;
+    public Rigidbody rbB;
 
     public bool access;
 
@@ -27,6 +29,8 @@ public class TilesLogic : MonoBehaviour
     {
         rbR = Right.GetComponent<Rigidbody>();
         rbL = Left.GetComponent<Rigidbody>();
+        rbT = Top.GetComponent<Rigidbody>();
+        rbB = Bottom.GetComponent<Rigidbody>();
 
         Invoke("giveSaberDelay", 2f);
         
@@ -37,9 +41,25 @@ public class TilesLogic : MonoBehaviour
         if (access == true)
         {
             if (SaberCheck.CheckCut == 1)
-                {
-                    TopCut();
-                }
+            {
+                TopCut();
+            }
+
+            if (SaberCheck.CheckCut == 2)
+            {
+                TopCut();
+            }
+
+            if (SaberCheck.CheckCut == 3)
+            {
+                LeftCut();
+            }
+
+            if (SaberCheck.CheckCut == 4)
+            {
+                LeftCut();
+            }
+
         }       
     }
 
@@ -50,7 +70,7 @@ public class TilesLogic : MonoBehaviour
         access = true;
     }
 
-    public void TopCut()
+    public void NullParent()
     {
         TileTopR.transform.SetParent(null);
         TileTopL.transform.SetParent(null);
@@ -61,6 +81,11 @@ public class TilesLogic : MonoBehaviour
         Bottom.transform.SetParent(null);
         Right.transform.SetParent(null);
         Left.transform.SetParent(null);
+    }
+
+    public void TopCut()
+    {
+        NullParent();
 
         TileTopL.transform.SetParent(Left.transform);
         TileBotL.transform.SetParent(Left.transform);
@@ -69,6 +94,19 @@ public class TilesLogic : MonoBehaviour
 
         rbR.useGravity = true;
         rbL.useGravity = true;
+    }
+
+    public void LeftCut()
+    {
+        NullParent();
+
+        TileTopL.transform.SetParent(Top.transform);
+        TileTopR.transform.SetParent(Top.transform);
+        TileBotL.transform.SetParent(Bottom.transform);
+        TileBotR.transform.SetParent(Bottom.transform);
+
+        rbT.useGravity = true;
+        rbB.useGravity = true;
     }
 
 

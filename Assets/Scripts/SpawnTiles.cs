@@ -12,7 +12,7 @@ public class SpawnTiles : MonoBehaviour
     private int xPos;
     void Start()
     {
-        Invoke("SpawnTile", 1f);
+        Invoke("SpawnTile", 0.7f);
         
     }
 
